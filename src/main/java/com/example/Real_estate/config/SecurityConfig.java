@@ -20,14 +20,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
-        .csrf(csrf -> csrf.disable()) //Disable csrd for rest api
+        .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/admin/**").permitAll() // for admin endpoints
+            .requestMatchers("/**").permitAll() // Allow all requests for testing
             .anyRequest().authenticated()
-        )
-        .httpBasic(httpBasic -> {});
+        );
 
         return http.build();
     }
 }
-
